@@ -41,18 +41,28 @@ def handle_hello():
 @app.route('/sendmsg', methods=['GET'])
 def first_msg():
 
-    first_function('These are the people in line.')
+    first_function('Test')
 
     return jsonify({'msg':'message sent!' }), 200
 
 @app.route('/newmsg', methods=['POST'])
 def new_message():
 
-    body = request.get_json()
+    body = request.form()
+    
+    name = body['Body']
+    number = body['From']
+    message =  name + ", you are now in the queue."
 
-    first_function(body['message'])
+    Queue().enqueue(name, number)
+    
+    resp = MessagingResponse()
+    resp.message("Hello " + message_body + " you have been added."  " There are " + repr(len(Queue()._queeue)-1) + " person in front of you.")
+    return  str(resp)
 
-    return jsonify({'msg':'message sent!' }), 200
+@app.route('/all_queue', methods=['GET'])
+def getting_all_messages():
+    return jsonify(Queue()._queue), 200
 
 
 # this only runs if `$ python src/main.py` is executed

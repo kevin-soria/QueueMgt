@@ -1,10 +1,10 @@
 from twilio.rest import Client
 import os
-from models import Queue
+from models import Queue, Person
 
 Q = Queue ()
 
-def first_function(mess):
+def first_function(number, mess):
 
     account_sid = os.environ.get('SID_KEV') 
     auth_token = os.environ.get('TOKEN_KEV')
@@ -12,10 +12,10 @@ def first_function(mess):
 
     message = client.messages \
         .create(
-            body="Hi "+ ", your number:" + Q.number[0] +"in line.",
+            body=mess,
             from_='+12064660790',
-            to=Q.number[0]
+            to=number
         )
 
     print(message.sid)
-    return repr(Q._queue[0])
+    # return repr(Q._queue)

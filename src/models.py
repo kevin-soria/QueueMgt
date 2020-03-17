@@ -14,15 +14,10 @@ class Person(db.Model):
     def __repr__(self):
         return '<Person %r>' % self.name
 
-    def serialize(self):
-        return {
-            "name": self.name
-        }
-
 class Queue:
  
     def __init__(self):
-        self.number = []
+        self.numbers = []
         self._queue = []
         self._mode = 'FIFO'
 
@@ -30,11 +25,15 @@ class Queue:
         return (self._queue)
 
     def enqueue(self, name, number):
-        self._queue.append(name)
-        self.number.append(number)
+        self._queue.append("kevinnn")
+        self.numbers.append(number)
+
     def dequeue(self):
-        pass
+        self._queue.pop(name)
+        self.numbers.pop(number)
+   
     def get_queue(self):
-        pass
+        self._queue
+   
     def size(self):
         return len(self._queue) 
